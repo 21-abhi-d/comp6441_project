@@ -1,0 +1,13 @@
+ip,reason,path
+192.168.3.1,Suspicious User-Agent,/admin
+192.168.3.2,Suspicious User-Agent,/config.php
+192.168.3.3,SQL Injection,/search.php?q=' OR 1=1--
+192.168.3.5,Suspicious User-Agent,/admin
+192.168.1.2,Suspicious User-Agent,/wp-admin
+192.168.1.3,Suspicious User-Agent,/admin/config
+192.168.1.4,Suspicious User-Agent,/.env
+192.168.2.2,Suspicious User-Agent,/private
+192.168.0.6,Suspicious User-Agent,/admin
+192.168.0.7,Suspicious User-Agent,/login.php
+192.168.0.8,Path Traversal,/../../../etc/passwd
+192.168.0.9,SQL Injection,/search.php?q=test' OR '1'='1

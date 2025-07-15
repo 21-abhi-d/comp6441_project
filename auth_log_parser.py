@@ -25,6 +25,6 @@ def parse_auth_log_folder(folder_path):
                 for line in f:
                     result = parse_auth_log_line(line.strip())
                     if result:
-                        result["source_file"] = filename  # Optional: track source file
+                        result["source_file"] = filename
                         entries.append(result)
     return entries

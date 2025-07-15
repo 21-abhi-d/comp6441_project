@@ -1,0 +1,18 @@
+[
+    {
+        "ip": "192.168.0.50",
+        "failed_attempts": 5
+    },
+    {
+        "ip": "192.168.0.30",
+        "failed_attempts": 5
+    },
+    {
+        "ip": "192.168.0.40",
+        "failed_attempts": 5
+    },
+    {
+        "ip": "192.168.0.10",
+        "failed_attempts": 5
+    }
+]

@@ -19,7 +19,7 @@ def detect_brute_force(entries=None, folder_path=None):
         times.sort()
         for i in range(len(times) - 4):
             if times[i + 4] - times[i] <= timedelta(minutes=1):
-                suspicious_ips.append(ip)
+                suspicious_ips.append((ip, len(failed_logins_by_ip[ip])))
                 break
 
     return suspicious_ips

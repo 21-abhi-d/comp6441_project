@@ -1,0 +1,62 @@
+[
+    {
+        "ip": "192.168.3.1",
+        "reason": "Suspicious User-Agent",
+        "path": "/admin"
+    },
+    {
+        "ip": "192.168.3.2",
+        "reason": "Suspicious User-Agent",
+        "path": "/config.php"
+    },
+    {
+        "ip": "192.168.3.3",
+        "reason": "SQL Injection",
+        "path": "/search.php?q=' OR 1=1--"
+    },
+    {
+        "ip": "192.168.3.5",
+        "reason": "Suspicious User-Agent",
+        "path": "/admin"
+    },
+    {
+        "ip": "192.168.1.2",
+        "reason": "Suspicious User-Agent",
+        "path": "/wp-admin"
+    },
+    {
+        "ip": "192.168.1.3",
+        "reason": "Suspicious User-Agent",
+        "path": "/admin/config"
+    },
+    {
+        "ip": "192.168.1.4",
+        "reason": "Suspicious User-Agent",
+        "path": "/.env"
+    },
+    {
+        "ip": "192.168.2.2",
+        "reason": "Suspicious User-Agent",
+        "path": "/private"
+    },
+    {
+        "ip": "192.168.0.6",
+        "reason": "Suspicious User-Agent",
+        "path": "/admin"
+    },
+    {
+        "ip": "192.168.0.7",
+        "reason": "Suspicious User-Agent",
+        "path": "/login.php"
+    },
+    {
+        "ip": "192.168.0.8",
+        "reason": "Path Traversal",
+        "path": "/../../../etc/passwd"
+    },
+    {
+        "ip": "192.168.0.9",
+        "reason": "SQL Injection",
+        "path": "/search.php?q=test' OR '1'='1"
+    }
+]
