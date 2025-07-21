@@ -1,11 +1,14 @@
 from access_log_parser import parse_access_log_folder
 
-def detect_web_attacks(folder_path):
-    entries = parse_access_log_folder(folder_path)
+def detect_web_attacks(entries=None, folder_path=None):
+    if entries is None:
+        if not folder_path:
+            raise ValueError("Must provide either entries or folder_path")
+        entries = parse_access_log_folder(folder_path)
 
     def is_suspicious(entry):
-        path = entry["path"]
-        agent = entry["agent"].lower()
+        path = entry.get("path", "")
+        agent = entry.get("agent", "").lower()
 
         if "../" in path or "..%2f" in path:
             return "Path Traversal"
