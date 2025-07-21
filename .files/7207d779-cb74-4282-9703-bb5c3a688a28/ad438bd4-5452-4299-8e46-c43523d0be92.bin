@@ -1,6 +1,0 @@
-Jun 30 14:35:10 myserver sshd[55501]: Failed password for invalid user admin from 192.168.0.50 port 62001 ssh2
-Jun 30 14:35:12 myserver sshd[55502]: Failed password for invalid user admin from 192.168.0.50 port 62002 ssh2
-Jun 30 14:35:14 myserver sshd[55503]: Failed password for invalid user admin from 192.168.0.50 port 62003 ssh2
-Jun 30 14:35:16 myserver sshd[55504]: Failed password for invalid user admin from 192.168.0.50 port 62004 ssh2
-Jun 30 14:35:18 myserver sshd[55505]: Failed password for invalid user admin from 192.168.0.50 port 62005 ssh2
-Jun 30 14:35:25 myserver sshd[55506]: Accepted password for validuser from 192.168.0.51 port 62010 ssh2

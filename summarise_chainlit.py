@@ -15,6 +15,7 @@ from detectors.web_attack_detector import detect_web_attacks
 from detectors.intrusion_detector import detect_intrusions
 from detectors.user_enum_detector import detect_user_enumeration
 from detectors.port_scan_detector import detect_port_scans
+from detectors.suspicious_http_detector import detect_suspicious_http_methods
 
 # Load environment variables
 load_dotenv()
@@ -75,6 +76,9 @@ async def start():
     
     await cl.Message("Running port scan detection...").send()
     user_enum_suspects = detect_port_scans(entries=access_entries) if access_entries else []
+    
+    await cl.Message("Running suspicious HTTP method detection...").send()
+    user_enum_suspects = detect_suspicious_http_methods(entries=access_entries) if access_entries else []
 
     combined_results = []
     for ip, count in auth_suspects:

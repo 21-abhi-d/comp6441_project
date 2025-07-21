@@ -1,5 +1,0 @@
-Jun 30 13:22:11 myserver sshd[44401]: Failed password for invalid user root from 192.168.0.40 port 61001 ssh2
-Jun 30 13:22:13 myserver sshd[44402]: Failed password for invalid user pi from 192.168.0.40 port 61002 ssh2
-Jun 30 13:22:15 myserver sshd[44403]: Failed password for invalid user sys from 192.168.0.40 port 61003 ssh2
-Jun 30 13:22:17 myserver sshd[44404]: Failed password for invalid user oracle from 192.168.0.40 port 61004 ssh2
-Jun 30 13:22:19 myserver sshd[44405]: Failed password for invalid user admin from 192.168.0.40 port 61005 ssh2
