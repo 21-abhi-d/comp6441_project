@@ -7,7 +7,7 @@ def detect_intrusions(entries, max_attempts=5, window_minutes=2):
 
     for entry in entries:
         if entry.get("status") == "Failed":
-            timestamp = datetime.strptime(entry["timestamp"], "%Y-%m-%d %H:%M:%S")
+            timestamp = entry["timestamp"]
             ip_timestamps[entry["ip"]].append(timestamp)
 
     suspicious_ips = []

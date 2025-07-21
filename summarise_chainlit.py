@@ -14,6 +14,7 @@ from detectors.bf_detector import detect_brute_force
 from detectors.web_attack_detector import detect_web_attacks
 from detectors.intrusion_detector import detect_intrusions
 from detectors.user_enum_detector import detect_user_enumeration
+from detectors.port_scan_detector import detect_port_scans
 
 # Load environment variables
 load_dotenv()
@@ -60,12 +61,20 @@ async def start():
                 if parsed:
                     access_entries.append(parsed)
 
-    await cl.Message("🧠 Running detection algorithms...").send()
-
+    await cl.Message("Running brute-force detection...").send()
     auth_suspects = detect_brute_force(entries=auth_entries) if auth_entries else []
+
+    await cl.Message("Running web attack detection...").send()
     access_suspects = detect_web_attacks(entries=access_entries) if access_entries else []
+
+    await cl.Message("Running intrusion detection...").send()
     intrusion_suspects = detect_intrusions(auth_entries) if auth_entries else []
+
+    await cl.Message("Running user enumeration detection...").send()
     user_enum_suspects = detect_user_enumeration(auth_entries) if auth_entries else []
+    
+    await cl.Message("Running port scan detection...").send()
+    user_enum_suspects = detect_port_scans(entries=access_entries) if access_entries else []
 
     combined_results = []
     for ip, count in auth_suspects:
@@ -82,6 +91,7 @@ async def start():
         return
 
     await cl.Message("📝 Summarizing findings using AI...").send()
+    
 
     documents = [Document(page_content=str(entry)) for entry in combined_results]
     splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
