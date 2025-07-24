@@ -1,19 +1,19 @@
-# 🔐 Log Anomaly Detection Framework (with Chainlit + Detectors)
+# Log Anomaly Detection Framework (with Chainlit + Detectors)
 
 This project is a lightweight yet extensible framework for detecting suspicious activity in system and web server logs. It combines rule-based detection algorithms, custom log parsers, and LLM-based summarization via Chainlit and LangChain.
 
 ---
 
-## 📦 Features
+## Features
 
-- ✅ **Modular Detectors**: Includes detectors for brute-force SSH attempts, web attack patterns, port scans, user enumeration, DoS attempts, suspicious HTTP methods, and more.
-- 📈 **LLM Summarization**: Uses OpenAI's GPT-4o via LangChain to summarize threats and allow follow-up natural language queries.
-- 💡 **Interactive UI**: Built on Chainlit for a simple, chat-style web interface.
-- 🧪 **Standalone Runner**: CLI utility for testing detectors directly and exporting results as `.csv`/`.json`.
+- **Modular Detectors**: Includes detectors for brute-force SSH attempts, web attack patterns, port scans, user enumeration, DoS attempts, suspicious HTTP methods, and more.
+- **LLM Summarization**: Uses OpenAI's GPT-4o via LangChain to summarize threats and allow follow-up natural language queries.
+- **Interactive UI**: Built on Chainlit for a simple, chat-style web interface.
+- **Standalone Runner**: CLI utility for testing detectors directly and exporting results as `.csv`/`.json`.
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 .
@@ -39,9 +39,9 @@ This project is a lightweight yet extensible framework for detecting suspicious 
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
-### 1. 🧱 Requirements
+### 1. Requirements
 
 - Python 3.10+
 - `pip install -r requirements.txt`
@@ -54,7 +54,7 @@ Required packages include:
 
 ---
 
-### 2. 🔑 Setup
+### 2. Setup
 
 1. Create a `.env` file in the root directory:
 
@@ -68,9 +68,9 @@ OPENAI_API_KEY=your-openai-api-key-here
 
 ---
 
-## 💬 Usage Modes
+## Usage Modes
 
-### Mode 1: 🧠 Chainlit UI with LLM Summary
+### Mode 1: Chainlit UI with LLM Summary
 
 Run:
 
@@ -82,7 +82,7 @@ Upload `.log` files and interact via chat. The LLM will summarize detected anoma
 
 ---
 
-### Mode 2: 🧪 Standalone CLI Runner (No LLM)
+### Mode 2: Standalone CLI Runner (No LLM)
 
 Run:
 
@@ -98,7 +98,7 @@ It will:
 
 ---
 
-## 🔍 Detectors Implemented
+## Detectors Implemented
 
 | Detector                  | Log Type    | Description                                                                 |
 |--------------------------|-------------|-----------------------------------------------------------------------------|
@@ -112,7 +112,7 @@ It will:
 
 ---
 
-## 📂 Outputs
+## Outputs
 
 - Printed in terminal for CLI runner
 - Summarized in Chainlit UI
@@ -122,7 +122,7 @@ It will:
 
 ---
 
-## 🛠️ Extending This Project
+## Extending This Project
 
 Want to add new detectors?
 
@@ -135,13 +135,13 @@ Want to add new detectors?
 
 ---
 
-## ✨ Credits
+## Credits
 
 Developed by Abhishek Deshpande (COMP6441 UNSW Project)  
 Powered by [Chainlit](https://www.chainlit.io/) and [LangChain](https://www.langchain.com/)
 
 ---
 
-## 📜 License
+## License
 
 MIT License. Free for educational and research use.
