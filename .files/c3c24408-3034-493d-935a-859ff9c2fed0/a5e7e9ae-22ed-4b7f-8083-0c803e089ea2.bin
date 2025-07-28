@@ -1,7 +1,0 @@
-Jun 30 10:12:45 myserver sshd[12345]: Failed password for invalid user admin from 192.168.0.10 port 54321 ssh2
-Jun 30 10:12:47 myserver sshd[12346]: Failed password for invalid user root from 192.168.0.10 port 54322 ssh2
-Jun 30 10:12:49 myserver sshd[12347]: Failed password for invalid user test from 192.168.0.10 port 54323 ssh2
-Jun 30 10:13:01 myserver sshd[12348]: Failed password for invalid user admin from 192.168.0.10 port 54324 ssh2
-Jun 30 10:13:10 myserver sshd[12349]: Failed password for invalid user guest from 192.168.0.10 port 54325 ssh2
-Jun 30 10:14:05 myserver sshd[12350]: Accepted password for validuser from 192.168.0.20 port 54401 ssh2
-Jun 30 10:14:15 myserver sshd[12351]: Failed password for invalid user backup from 192.168.0.21 port 54405 ssh2

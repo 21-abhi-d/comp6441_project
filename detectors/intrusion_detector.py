@@ -7,6 +7,7 @@ def detect_intrusions(entries, max_attempts=5, window_minutes=2):
 
     for entry in entries:
         if entry.get("status") == "Failed":
+            print(f"DEBUG | IP: {entry['ip']} | Time: {entry['timestamp']} | Status: {entry['status']}")
             timestamp = entry["timestamp"]
             ip_timestamps[entry["ip"]].append(timestamp)
 
