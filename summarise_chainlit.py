@@ -8,6 +8,13 @@ from langchain_openai import ChatOpenAI
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.prompts import PromptTemplate
 import pprint
+from reportlab.lib.pagesizes import A4
+from reportlab.pdfgen import canvas
+from datetime import datetime
+from reportlab.lib.utils import simpleSplit
+from reportlab.platypus import Table, TableStyle
+from reportlab.lib import colors
+
 
 # Import parser and detector modules
 from auth_log_parser import parse_auth_log_line
@@ -19,6 +26,85 @@ from detectors.user_enum_detector import detect_user_enumeration
 from detectors.port_scan_detector import detect_port_scans
 from detectors.suspicious_http_detector import detect_suspicious_http_methods
 from detectors.dos_detector import detect_dos_attempts
+
+
+def create_pdf_report(filepath: str, summary_text: str, findings: list, business_context: str = ""):
+    c = canvas.Canvas(filepath, pagesize=A4)
+    width, height = A4
+    margin = 50
+    line_height = 14
+    y = height - margin
+
+    def write_line(text, bold=False, lines_after=0):
+        nonlocal y
+        if y < margin + line_height:
+            c.showPage()
+            y = height - margin
+
+        font = "Helvetica-Bold" if bold else "Helvetica"
+        font_size = 11
+        c.setFont(font, font_size)
+
+        # Wrap text
+        wrapped_lines = simpleSplit(text, font, font_size, width - 2 * margin)
+        for wrapped_line in wrapped_lines:
+            if y < margin + line_height:
+                c.showPage()
+                y = height - margin
+                c.setFont(font, font_size)
+            c.drawString(margin, y, wrapped_line)
+            y -= line_height
+
+        y -= line_height * lines_after
+
+    write_line("Cybersecurity Threat Report", bold=True, lines_after=1)
+    write_line(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    write_line(f"Business Context: {business_context or 'Not provided'}", lines_after=1)
+    write_line("")
+
+    write_line("Summary of Findings", bold=True, lines_after=1)
+    for line in summary_text.strip().split("\n"):
+        line = line.strip()
+        if not line:
+            y -= line_height
+        else:
+            write_line(line)
+
+    write_line("", lines_after=1)
+    table_data = [["Type", "IP", "Reason", "Path"]]
+    for entry in findings:
+        row = [
+            entry.get("type", ""),
+            entry.get("ip", ""),
+            entry.get("reason", ""),
+            entry.get("path", "")
+        ]
+        table_data.append(row)
+
+    # Create the table object
+    table = Table(table_data, colWidths=[100, 100, 150, 180])
+
+    # Add styling
+    table.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.lightgrey),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),
+        ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('FONTSIZE', (0, 0), (-1, -1), 10),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 6),
+        ('GRID', (0, 0), (-1, -1), 0.5, colors.grey)
+    ]))
+
+    # Draw the table manually
+    table.wrapOn(c, width, height)
+    table_width, table_height = table.wrap(0, 0)
+
+    # Add spacing between last line and the table
+    y -= table_height + 20
+    table.drawOn(c, margin, y)
+    y -= 20  # Adjust y for future content if needed
+
+    c.save()
 
 # Load environment variables
 load_dotenv()
@@ -196,9 +282,7 @@ async def answer(message: cl.Message):
 
         documents = [Document(page_content=str(entry)) for entry in combined_results]
         splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
-        
         docs = splitter.split_documents(documents)
-
         cl.user_session.set("parsed_docs", docs)
 
         summary = chain.invoke({
@@ -206,6 +290,18 @@ async def answer(message: cl.Message):
             "question": "Summarize all suspicious activity and patterns in the logs."
         })
         await cl.Message(content=f"**Security Findings Summary**\n\n{summary}").send()
+        # Create PDF report
+        pdf_path = "threat_report.pdf"
+        business_context = cl.user_session.get("business_context", "")
+        create_pdf_report(pdf_path, summary, combined_results, business_context)
+
+        await cl.Message("📄 Here is your downloadable PDF report:").send()
+
+        await cl.send_file(
+            path=pdf_path,
+            name="threat_report.pdf",
+            display_name="Download Threat Report"
+        )
         return
 
     # Any other message (e.g. business context or question)
